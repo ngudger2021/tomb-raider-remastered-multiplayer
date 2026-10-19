@@ -1,0 +1,35 @@
+.TH SUPER-LARA 1 "October 2026" "Super Lara" "User Commands"
+.SH NAME
+super-lara \- native Super Lara mods for Tomb Raider I-III Remastered
+.SH SYNOPSIS
+.B super-lara
+.RI [ options ]
+.SH DESCRIPTION
+Connects to the current user's Proton game and applies selected data-only mods.
+All mods start disabled. Only the explicitly supported Steam build is accepted.
+Start the game normally through Steam; no sudo or Steam launch options are needed.
+.SH OPTIONS
+.TP
+.B --inspect
+Read live player state without enabling mods.
+.TP
+.B --installations
+List detected Steam libraries and Proton environments.
+.TP
+.B --seconds N
+Duration of a command-line inspection or oxygen test.
+.TP
+.B --oxygen
+Enable infinite oxygen in a command-line test. SIGUSR1 toggles it during the test.
+.TP
+.B --version
+Print the application version.
+.SH FILES
+Settings: $XDG_CONFIG_HOME/super-lara/settings.json (default ~/.config).
+.br
+Logs: $XDG_STATE_HOME/super-lara/super-lara.log (default ~/.local/state).
+.SH NOTES
+Do not run as root. Unchecking a mod stops its writes; closing the application
+stops all writes. A game update may require an updated supported-build manifest.
+.SH AUTHOR
+Based on Burn's Mods by burn_sours. See the packaged copyright notice.

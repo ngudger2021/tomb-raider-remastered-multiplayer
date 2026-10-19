@@ -1,0 +1,47 @@
+{
+  "patch": "patch5.4",
+  "name": "Steam 6 October 2026 - Challenge Mode Update 4",
+  "source": "78ea92cccb5fad00256781b4332c097cd801cb0c",
+  "dll_hash_provenance": "Local Steam build 25209630, executable matched upstream patch5.4; DLL hashes captured 2026-10-19. Not upstream published hashes.",
+  "modules": {
+    "tomb123.exe": {
+      "file": "tomb123.exe",
+      "sha256": "614f9578215a213a0950b0cb1533d7d416fb5eb1daac6e6375da0e08c8e2b729",
+      "variables": {
+        "GameVersion": 984120,
+        "Level": 3733312,
+        "ExitingGame": 4321752
+      }
+    },
+    "tomb1.dll": {
+      "file": "1/tomb1.dll",
+      "sha256": "979990f9a2db7474e2b18f204d748cecb5aae2b72cec5ed05e0a2353683a1687",
+      "variables": {
+        "MainPlayerEntity": 3402384,
+        "PlayerOxygen": 3401974,
+        "RoomType": 3401964,
+        "LevelId": 1071800
+      }
+    },
+    "tomb2.dll": {
+      "file": "2/tomb2.dll",
+      "sha256": "c91e8fe752d765f0ee6b52bf0cc5016c33ee9d850fe001272f17a302c6253d1a",
+      "variables": {
+        "MainPlayerEntity": 3656624,
+        "PlayerOxygen": 3656214,
+        "RoomType": 3656204,
+        "LevelId": 1438216
+      }
+    },
+    "tomb3.dll": {
+      "file": "3/tomb3.dll",
+      "sha256": "067a18610ea06f28ae63e615d8b0986cf2a87383e2acb61f1faf37a175102e30",
+      "variables": {
+        "MainPlayerEntity": 4025040,
+        "PlayerOxygen": 4024630,
+        "RoomType": 4024620,
+        "LevelId": 1804332
+      }
+    }
+  }
+}

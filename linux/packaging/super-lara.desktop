@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Burn's Mods — Super Lara
+Comment=Super Lara mods for Tomb Raider I–III Remastered
+Exec=super-lara
+Icon=super-lara
+Terminal=false
+Categories=Game;
+StartupNotify=true
+Keywords=Tomb;Raider;Lara;Mods;
+StartupWMClass=Superlara

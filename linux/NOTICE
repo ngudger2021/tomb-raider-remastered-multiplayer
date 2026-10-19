@@ -1,0 +1,24 @@
+Super Lara for Linux — beta
+
+Based on Burn's Mods & Multiplayer by burn_sours.
+Upstream: https://github.com/burn-sours/tomb-raider-remastered-multiplayer
+Pinned source revision: 78ea92cccb5fad00256781b4332c097cd801cb0c (v2.5.5)
+Upstream copyright: Copyright © 2026 burn_sours.
+Licence: GPL-3.0-only; see the repository-root LICENSE. Release source archives
+include this original licence as upstream/LICENSE.
+
+Ubuntu adaptation (2026): native Python/Tk desktop interface, Linux process
+and PE-module discovery, build validation, guarded data-only memory backend,
+rate-limited diagnostics, tests, and packaging. Oxygen, health, fall-speed,
+and jump behaviour and offsets are adapted from upstream client/features/
+and client/games/trr-123/. The original pinned upstream source is included.
+
+This application is an independent adaptation, not an upstream release.
+No proprietary game files, saves, or extracted Windows application are included.
+The optional Frida research runtime uses its own licence; it is not part of the
+runtime package. The application itself needs only Python 3 and Tk.
+
+Original logo.png, burn.png, burn_256.png and burn.ico are preserved byte-for-byte
+from upstream client/ui/images. The header, stop, folder and related icon SVG
+geometry is imported from client/ui/launcher.html; PNG renderings adapt it for Tk.
+The Windows branding is reused with attribution; this is an independent Linux port.

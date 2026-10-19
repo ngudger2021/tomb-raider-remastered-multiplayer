@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+work/
+dist/
+logs/
+data/

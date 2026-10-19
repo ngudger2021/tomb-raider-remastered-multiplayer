@@ -1,0 +1,21 @@
+{
+  "upstream_commit": "78ea92cccb5fad00256781b4332c097cd801cb0c",
+  "source": "client/ui/images and inline SVGs from client/ui/launcher.html",
+  "original_image_sha256": {
+    "images/burn.ico": "7d9abf166e4ab9331a3d76458cc1779562d693855dbb7bcbac05b1863848365f",
+    "images/burn.png": "d5ff70304cb3043a3324abe1735f2d4aaebc7b8e1b4ac7e0ffb481a55da29520",
+    "images/burn_256.png": "8ebf5f07e77b166c928982b4e2c1eacdbff1e9fb2026a943a6368ae9a8133355",
+    "images/logo.png": "7bbc3973de895700efdd1c941c643bfdb82eb8feeab353b08b3c289464a36f78"
+  },
+  "icons": [
+    "discord",
+    "github",
+    "selectExeButton",
+    "speedrun",
+    "stopModsButton",
+    "support",
+    "tr6ContentOpenFolderBtn",
+    "tr6ContentRevalidateBtn"
+  ],
+  "licence": "GPL-3.0-only; preserve burn_sours attribution; no claim of official endorsement"
+}
