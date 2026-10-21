@@ -1,63 +1,78 @@
 # Verification and compatibility limits
 
-The Linux port is derived from Burn’s Mods v2.5.5, revision
-78ea92cccb5fad00256781b4332c097cd801cb0c, and preserves GPL-3.0-only attribution.
-It accepts only the Steam patch 5.4 executable and the three exact DLL hashes
-recorded in src/build.json. The executable hash matches the upstream manifest;
-the DLL hashes pin the locally verified Steam build 25209630.
+The Linux port adapts four existing Burn’s Mods cheats from v2.5.5, revision
+78ea92cccb5fad00256781b4332c097cd801cb0c. Only the exact Steam patch 5.4 executable
+and three DLL hashes recorded in src/build.json are accepted. The executable hash
+matches the upstream manifest; DLL hashes pin the locally tested Steam build
+25209630 and are not upstream-published hashes.
 
-## Completed before this contribution
+## Gameplay evidence
 
-On Ubuntu 26.04 with Snap Steam and Proton Experimental:
+On Ubuntu 26.04 with Snap Steam and Proton Experimental, the contributor confirmed
+infinite oxygen, infinite health, no fall damage and super jump in TR I, II and III.
+Backend telemetry independently recorded switching between their DLLs.
 
-- The user confirmed oxygen, health, no fall damage and super jump in TR1, TR2
-  and TR3. Backend telemetry independently showed switching between their DLLs.
-- Underwater oxygen remained at 1899–1900 while enabled. After disabling it,
-  24 underwater samples decreased from 1884 to 1188 with an unchanged write count.
-- A live wrong-expected-hash test rejected the process as unsupported before
-  opening any write descriptor.
-- The branded beta .deb installed successfully through apt with dependency
-  resolution. Its installed application opened and connected to the running TR3
-  game. Installed file checksums, original branding hashes, menu-file validation
-  and window identity were checked. A manual launch through the desktop app grid
-  remains a useful user check.
-- An isolated fakeroot/dpkg installation and removal cycle passed. The real app
-  was not uninstalled. Two package builds were byte-identical.
+Underwater oxygen remained at 1899–1900 when enabled. After disabling, 24 samples
+decreased from 1884 to 1188 with no further writes. A live wrong-expected-hash test
+rejected the process as unsupported before opening a writable memory descriptor.
 
-## Checks from this checkout
+These observations were made with the earlier four-feature Linux beta. The
+backend, UI, paths and supported-build manifest in 0.1.0~beta3 retain that code.
+Controller changes handle a worker/UI queue race and restrict the CLI oxygen
+signal toggle to explicit oxygen tests; inspection no longer registers that toggle.
+The beta3 packaging/controller changes have not repeated every live gameplay check.
+
+## Automated checks for 0.1.0~beta3
+
+From the repository root:
 
 ```sh
-cd linux
-xvfb-run -a python3 -m unittest discover -s tests -v
-python3 tools/build_deb.py
-python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta2_amd64.deb'
+xvfb-run -a python3 -m unittest discover -s linux/tests -v
+python3 linux/tools/build_deb.py
+python3 linux/tools/test_deb.py 'linux/dist/super-lara_0.1.0~beta3_amd64.deb'
+python3 linux/tools/build_appimage.py --download
+xvfb-run -a python3 linux/tools/test_appimage.py linux/dist/Super_Lara-0.1.0-beta3-x86_64.AppImage --gui
 ```
 
-All 16 tests and the package verifier passed from the fork checkout. The generated
-source archive was extracted and rebuilt successfully, and that rebuilt package
-also passed verification. The original-source archive entries matched the pinned
-UPSTREAM_FILES.json list exactly.
+There are 20 tests: 11 backend guard tests, two path tests, three UI tests and four
+CLI/controller tests. They cover exact intended write fields, disabled/loading/
+dead-player states, selector/level changes, write bounds, feature separation,
+XDG paths, branding, settings, disarming, read-only CLI behaviour and a UI queue
+handoff race. Backend/UI unit tests use mocks and do not write game memory.
 
-The tests cover backend write guards and feature separation, XDG paths, native
-window branding, controls, persistence, disable-all behaviour and error display.
-The package verifier checks ownership, permissions, file checksums, absence of
-maintainer scripts, desktop/window identity, original artwork hashes and extracted
-runtime startup. UI tests use a fake controller and never access the game.
+Package checks inspect permissions, checksums, absence of maintainer scripts,
+original artwork, desktop metadata and extracted startup. AppImage checks use
+isolated test state and verify the bundled interpreter/Tk, relocation with spaces,
+licences/source/checksums, and actual window startup/shutdown on a virtual display.
+The window starts with every feature off; the verifier rejects any mod-write log.
 
-## Remaining limits
+The matching Debian source archive is extracted/rebuilt separately, with package
+byte comparison. AppImage outputs are checked for repeatable builds; these are
+packaging checks, not clean-machine or new live gameplay tests.
 
-This is an experimental four-feature native backend, not Linux parity with the
-Windows launcher, multiplayer or other TR releases. There is no manual build
-bypass. Game updates require compatibility review. Long-duration play, every
-level/transition, other distributions, clean-machine installation and non-Snap
-Steam gameplay are not yet verified. There is a public maintainer-identity
-placeholder in packaging/release.json until a maintainer is chosen.
+## Installation history and remaining checks
 
-Native Linux Frida injection was tested and failed during bootstrap with
-`unable to perform ptrace pokedata: Input/output error`, before a script could
-be injected. The game exited during that investigation. The existing Windows
-Frida runtime, launched through Protontricks with the correct prefix, could not
-see the running game in its Windows process list. The underlying isolation cause
-remains unresolved. This backend avoids that path: it validates mapped PE data
-and uses bounded Linux process-memory reads/writes, with no injected script,
-remote Windows API calls or ABI assumptions. It does not change security settings.
+The earlier .deb installed successfully through apt on the contributor's host,
+resolved dependencies and connected to the game. Its installed files, desktop
+metadata and icons were checked. An isolated fakeroot/dpkg install/remove cycle
+and repeatable builds were also checked. Neither proves a clean-machine beta3
+upgrade/remove cycle; that remains a release check.
+
+Long play sessions, every level/transition, other distributions, non-Snap Steam,
+clean-machine installation and full Windows feature parity remain unverified.
+The AppImage has not independently repeated live gameplay. A public maintainer
+identity is deliberately unset until agreed. Unknown game files have no bypass.
+Memory checks and repeated identity reads reduce transition races; the game keeps
+running, so this is not an atomic engine transaction or a guarantee against all races.
+
+## Why the backend differs from the Windows launcher
+
+Native Linux Frida failed during injection bootstrap with
+`unable to perform ptrace pokedata: Input/output error`; the game exited during
+that investigation. Windows Frida launched through Protontricks could not see the
+running game in its Windows process list. The underlying cause remains unresolved.
+
+This port instead validates mapped PE files and uses bounded Linux process-data
+reads/writes. It injects no script and calls no Windows APIs. It does not change
+security settings. If the OS denies access, the app reports failure; compatibility
+with a different game/environment must be reviewed rather than forced.

@@ -16,7 +16,7 @@ push to GitHub, create releases or publish assets.
    cd linux
    xvfb-run -a python3 -m unittest discover -s tests -v
    python3 tools/build_deb.py --release --maintainer 'Name <email>'
-   python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta2_amd64.deb'
+   python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta3_amd64.deb'
    ```
 
    `--release` only rejects placeholder metadata; it does not publish anything.
@@ -27,9 +27,9 @@ push to GitHub, create releases or publish assets.
 6. The upstream maintainer can manually attach these three matching files to a
    GitHub Release or host them on their website:
 
-   - super-lara_0.1.0~beta2_amd64.deb
-   - super-lara_0.1.0~beta2_source.tar.gz
-   - super-lara_0.1.0~beta2_SHA256SUMS
+   - super-lara_0.1.0~beta3_amd64.deb
+   - super-lara_0.1.0~beta3_source.tar.gz
+   - super-lara_0.1.0~beta3_SHA256SUMS
 
    Use the actual version’s filenames after a version bump. Provide the complete
    corresponding GPL source alongside the binary and keep its licence/notices.
@@ -50,3 +50,18 @@ source timestamp when a maintainer prepares a new version.
 Artwork can optionally be reimported with tools/import_branding.py and ImageMagick.
 The checked-in artwork is enough for normal builds; ImageMagick is not a runtime
 dependency. The asset hash manifest records the original Windows image hashes.
+
+## AppImage
+
+See APPIMAGE.md for the complete prerequisites, pinned dependency downloads and
+FUSE-free build/launch instructions. From the repository root:
+
+```sh
+python3 linux/tools/build_appimage.py --download
+xvfb-run -a python3 linux/tools/test_appimage.py linux/dist/Super_Lara-0.1.0-beta3-x86_64.AppImage --gui
+```
+
+The first command creates intermediate Debian archives but does not install them.
+Publish the AppImage, its matching native-source archive and SHA256SUMS together
+only after agreeing release scope and maintainership. Runtime dependency notices
+and source URLs are retained in the image; no auto-update URL is configured.

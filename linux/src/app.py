@@ -15,7 +15,7 @@ import time
 from backend import BUILD, ROOT, Connection, StageError, discover, steam_installations
 from paths import user_paths
 
-VERSION = '0.1.0~beta2'
+VERSION = '0.1.0~beta3'
 PATHS = user_paths()
 DATA = PATHS['config']
 LOG = PATHS['state'] / 'super-lara.log'
@@ -56,7 +56,11 @@ class Controller:
         try:
             self.events.put_nowait(value)
         except queue.Full:
-            self.events.get_nowait()
+            try:
+                self.events.get_nowait()
+            except queue.Empty:
+                # The UI may have drained the queue since put_nowait failed.
+                pass
             self.events.put_nowait(value)
     def run(self):
         connection = None
@@ -116,12 +120,12 @@ def cli(args):
         raise StageError('process discovery', 'Game not running')
     with_connection = Connection(pid, diag)
     enabled = args.oxygen
-    # SIGUSR1 toggles the timed test without touching the game UI.
+    # Only explicit oxygen tests accept a signal that toggles writes.
     def toggle(*_):
         nonlocal enabled
         enabled = not enabled
         diag('control', f'oxygen enabled={enabled}')
-    signal.signal(signal.SIGUSR1, toggle)
+    previous_handler = signal.signal(signal.SIGUSR1, toggle) if args.oxygen else None
     try:
         until = time.monotonic() + args.seconds
         next_sample = 0
@@ -136,6 +140,8 @@ def cli(args):
             time.sleep(0.01)
     finally:
         with_connection.close()
+        if previous_handler is not None:
+            signal.signal(signal.SIGUSR1, previous_handler)
 
 
 def gui():

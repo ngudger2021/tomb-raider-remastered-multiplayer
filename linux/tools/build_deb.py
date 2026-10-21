@@ -126,7 +126,7 @@ Description: native Super Lara mods for Tomb Raider I-III Remastered
     for directory in ['src', 'packaging', 'tests']:
         source_files += [(p, 'linux/' + str(p.relative_to(ROOT))) for p in (ROOT / directory).rglob('*')
                          if p.is_file() and '__pycache__' not in p.parts]
-    for name in ['tools/build_deb.py', 'tools/test_deb.py', 'tools/import_branding.py', 'tools/preview_ui.py', 'UPSTREAM.json', 'UPSTREAM_FILES.json', 'NOTICE', 'README.md', 'VERIFICATION.md', 'RELEASE.md', 'run.sh']:
+    for name in ['tools/build_deb.py', 'tools/test_deb.py', 'tools/build_appimage.py', 'tools/test_appimage.py', 'tools/import_branding.py', 'tools/preview_ui.py', 'UPSTREAM.json', 'UPSTREAM_FILES.json', 'NOTICE', 'README.md', 'APPIMAGE.md', 'VERIFICATION.md', 'RELEASE.md', 'run.sh']:
         path = ROOT / name
         if path.exists():
             source_files.append((path, 'linux/' + name))

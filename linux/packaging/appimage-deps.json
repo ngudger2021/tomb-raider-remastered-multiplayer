@@ -1,0 +1,33 @@
+{
+  "architecture": "x86_64",
+  "python": {
+    "version": "3.12.15+20261013",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261013/cpython-3.12.15%2B20261013-x86_64-unknown-linux-gnu-install_only.tar.gz",
+    "sha256": "5d546fc004fc2435fa142eb8f42ed8de5eb4725963dc22f7e6671014a80eb560",
+    "source": "https://github.com/astral-sh/python-build-standalone/tree/20261013"
+  },
+  "appimagetool": {
+    "version": "1.9.1",
+    "url": "https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage",
+    "sha256": "ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0",
+    "source": "https://github.com/AppImage/appimagetool/tree/1.9.1"
+  },
+  "runtime": {
+    "version": "20251108",
+    "url": "https://github.com/AppImage/type2-runtime/releases/download/20251108/runtime-x86_64",
+    "sha256": "2fca8b443c92510f1483a883f60061ad09b46b978b2631c807cd873a47ec260d",
+    "source": "https://github.com/AppImage/type2-runtime/tree/20251108"
+  },
+  "provenance": "Versioned official release assets; SHA256 digests read from GitHub release asset metadata on 2026-10-21. No continuous tags.",
+  "python_metadata": {
+    "version": "3.12.15+20261013",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261013/cpython-3.12.15%2B20261013-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst",
+    "sha256": "dfb784f8d467e0c64c16d67a151c9145e64a0a11caa0ff699bc92899898cbb52",
+    "source": "https://github.com/astral-sh/python-build-standalone/tree/20261013"
+  },
+  "runtime_license": {
+    "url": "https://raw.githubusercontent.com/AppImage/type2-runtime/20251108/LICENSE",
+    "sha256": "aa154fc9070614bbe7921f89db11efd1dba7a1f3a41685958110e2230f9c0ca1",
+    "source": "https://github.com/AppImage/type2-runtime/tree/20251108"
+  }
+}

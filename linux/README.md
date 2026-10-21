@@ -9,6 +9,13 @@ by **burn_sours**, distributed under **GPL-3.0-only**. It reuses the Windows
 version’s original logo, flame icons and link artwork. The existing Windows
 launcher and server are separate and keep their existing build process.
 
+## Contribution scope
+
+This beta implements four existing cheats: infinite oxygen, infinite health,
+no fall damage and fixed-strength super jump. It is a subset of the Windows
+launcher’s features. No additional gameplay cheats or multiplayer are included.
+A portable AppImage is also provided; see [APPIMAGE.md](APPIMAGE.md).
+
 ## Compatibility
 
 | Item | Current support |
@@ -35,7 +42,7 @@ layout has been reviewed and tested.
 Download the `.deb`, then open a terminal in the download directory:
 
 ```sh
-sudo apt install ./super-lara_0.1.0~beta2_amd64.deb
+sudo apt install ./super-lara_0.1.0~beta3_amd64.deb
 ```
 
 Apt installs Python/Tk dependencies if needed. The package registers the original
@@ -217,7 +224,7 @@ Then, from `linux/`:
 ```sh
 xvfb-run -a python3 -m unittest discover -s tests -v
 python3 tools/build_deb.py --maintainer 'Your Name <your-email@example.com>'
-python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta2_amd64.deb'
+python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta3_amd64.deb'
 ```
 
 The Xvfb tests use a fake controller and never attach to the game. Package checks
@@ -226,9 +233,9 @@ the host. Running the builder and tests does not require root.
 
 Build outputs in `linux/dist/` are:
 
-- `super-lara_0.1.0~beta2_amd64.deb`
-- `super-lara_0.1.0~beta2_source.tar.gz` — corresponding GPL source
-- `super-lara_0.1.0~beta2_SHA256SUMS`
+- `super-lara_0.1.0~beta3_amd64.deb`
+- `super-lara_0.1.0~beta3_source.tar.gz` — corresponding GPL source
+- `super-lara_0.1.0~beta3_SHA256SUMS`
 
 Build output, test working directories and Python caches are ignored by Git.
 The source archive uses an explicit upstream file list; it excludes unrelated

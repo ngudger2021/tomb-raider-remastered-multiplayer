@@ -9,7 +9,7 @@ Based on Burn's Mods v2.5.5 by burn_sours, GPL-3.0-only.
 On a 64-bit x86 Ubuntu desktop, download the `.deb` and run from its directory:
 
 ```sh
-sudo apt install ./super-lara_0.1.0~beta2_amd64.deb
+sudo apt install ./super-lara_0.1.0~beta3_amd64.deb
 ```
 
 Open **Burn’s Mods — Super Lara** in your application menu, or run `super-lara`. Start your game
@@ -60,7 +60,7 @@ From this Linux source folder:
 ```sh
 python3 -m unittest discover -s tests -v
 python3 tools/build_deb.py --maintainer 'Your Name <your-email@example.com>'
-python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta2_amd64.deb'
+python3 tools/test_deb.py 'dist/super-lara_0.1.0~beta3_amd64.deb'
 ```
 
 Build outputs include the `.deb`, corresponding GPL source archive and SHA256SUMS.
